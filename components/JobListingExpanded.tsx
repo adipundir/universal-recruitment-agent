@@ -1,32 +1,20 @@
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import { MapPin, Clock, DollarSign } from "lucide-react"
+import { JobListing } from "@/constants/types"
 
-interface JobListingProps {
-    companyName: string
-    companyLogo: string
-    jobTitle: string
-    location: string
-    salary: string
-    postedDate: string
-    isRemote: boolean
-    applicantCount: number
-    description: string
-    requirements: string[]
-}
-
-export default function JobListing({
+export default function JobListingExpanded({
     companyName,
     companyLogo,
     jobTitle,
     location,
     salary,
     postedDate,
-    isRemote,
+    employmentType,
     applicantCount,
     description,
     requirements,
-}: JobListingProps) {
+}: JobListing) {
     return (
         <div className="max-w-2xl mx-auto bg-white shadow-lg rounded-lg overflow-hidden">
             <div className="p-6">
@@ -55,7 +43,7 @@ export default function JobListing({
                         <Clock className="w-4 h-4 mr-2" />
                         {postedDate}
                     </div>
-                    {isRemote && <Badge variant="secondary">Remote</Badge>}
+                    {employmentType && <Badge variant="secondary">employmentType</Badge>}
                 </div>
 
                 <p className="text-sm text-gray-500 mb-4">Over {applicantCount} applicants</p>
