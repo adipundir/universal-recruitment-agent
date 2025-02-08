@@ -1,0 +1,338 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "Job Openings",
+    "type": "array",
+    "items": {
+        "type": "object",
+        "properties": {
+            "_id": {
+                "type": "string",
+                "format": "uuid",
+                "coerce": true
+            },
+            "recruiterId": {
+                "type": "object",
+                "properties": {
+                    "$share": {
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "$share"
+                ]
+            },
+            "companyName": {
+                "type": "object",
+                "properties": {
+                    "$share": {
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "$share"
+                ]
+            },
+            "companyLogo": {
+                "type": "object",
+                "properties": {
+                    "$share": {
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "$share"
+                ]
+            },
+            "jobTitle": {
+                "type": "object",
+                "properties": {
+                    "$share": {
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "$share"
+                ]
+            },
+            "location": {
+                "type": "object",
+                "properties": {
+                    "$share": {
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "$share"
+                ]
+            },
+            "salary": {
+                "type": "object",
+                "properties": {
+                    "$share": {
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "$share"
+                ]
+            },
+            "postedDate": {
+                "type": "object",
+                "properties": {
+                    "$share": {
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "$share"
+                ]
+            },
+            "employmentType": {
+                "type": "object",
+                "properties": {
+                    "$share": {
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "$share"
+                ]
+            },
+            "candidates": {
+                "type": "array",
+                "items": {
+                    "type": "object",
+                    "properties": {
+                        "candidateId": {
+                            "type": "object",
+                            "properties": {
+                                "$share": {
+                                    "type": "string"
+                                }
+                            },
+                            "required": [
+                                "$share"
+                            ]
+                        },
+                        "resumeScore": {
+                            "type": "object",
+                            "properties": {
+                                "$share": {
+                                    "type": "string"
+                                }
+                            },
+                            "required": [
+                                "$share"
+                            ]
+                        },
+                        "interviewScores": {
+                            "type": "object",
+                            "properties": {
+                                "knowledge": {
+                                    "type": "object",
+                                    "properties": {
+                                        "$share": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "required": [
+                                        "$share"
+                                    ]
+                                },
+                                "truthfulness": {
+                                    "type": "object",
+                                    "properties": {
+                                        "$share": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "required": [
+                                        "$share"
+                                    ]
+                                },
+                                "communication": {
+                                    "type": "object",
+                                    "properties": {
+                                        "$share": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "required": [
+                                        "$share"
+                                    ]
+                                },
+                                "confidence": {
+                                    "type": "object",
+                                    "properties": {
+                                        "$share": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "required": [
+                                        "$share"
+                                    ]
+                                },
+                                "problemSolving": {
+                                    "type": "object",
+                                    "properties": {
+                                        "$share": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "required": [
+                                        "$share"
+                                    ]
+                                },
+                                "jobFit": {
+                                    "type": "object",
+                                    "properties": {
+                                        "$share": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "required": [
+                                        "$share"
+                                    ]
+                                },
+                                "adaptability": {
+                                    "type": "object",
+                                    "properties": {
+                                        "$share": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "required": [
+                                        "$share"
+                                    ]
+                                },
+                                "culturalFit": {
+                                    "type": "object",
+                                    "properties": {
+                                        "$share": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "required": [
+                                        "$share"
+                                    ]
+                                }
+                            },
+                            "required": [
+                                "knowledge",
+                                "truthfulness",
+                                "communication",
+                                "confidence",
+                                "problemSolving",
+                                "jobFit",
+                                "adaptability",
+                                "culturalFit"
+                            ]
+                        },
+                        "overallScore": {
+                            "type": "object",
+                            "properties": {
+                                "$share": {
+                                    "type": "string"
+                                }
+                            },
+                            "required": [
+                                "$share"
+                            ]
+                        },
+                        "feedback": {
+                            "type": "object",
+                            "properties": {
+                                "$share": {
+                                    "type": "string"
+                                }
+                            },
+                            "required": [
+                                "$share"
+                            ]
+                        },
+                        "interviewDate": {
+                            "type": "object",
+                            "properties": {
+                                "$share": {
+                                    "type": "string"
+                                }
+                            },
+                            "required": [
+                                "$share"
+                            ]
+                        },
+                        "verdict": {
+                            "type": "object",
+                            "properties": {
+                                "$share": {
+                                    "type": "string"
+                                }
+                            },
+                            "required": [
+                                "$share"
+                            ]
+                        }
+                    },
+                    "required": [
+                        "candidateId",
+                        "resumeScore",
+                        "interviewScores",
+                        "overallScore",
+                        "feedback",
+                        "interviewDate",
+                        "verdict"
+                    ]
+                }
+            },
+            "description": {
+                "type": "object",
+                "properties": {
+                    "$share": {
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "$share"
+                ]
+            },
+            "requirements": {
+                "type": "array",
+                "items": {
+                    "type": "object",
+                    "properties": {
+                        "$share": {
+                            "type": "string"
+                        }
+                    },
+                    "required": [
+                        "$share"
+                    ]
+                }
+            },
+            "isAccepting": {
+                "type": "object",
+                "properties": {
+                    "$share": {
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "$share"
+                ]
+            }
+        },
+        "required": [
+            "_id",
+            "recruiterId",
+            "companyName",
+            "jobTitle",
+            "location",
+            "salary",
+            "postedDate",
+            "employmentType",
+            "description",
+            "requirements",
+            "isAccepting"
+        ]
+    }
+}

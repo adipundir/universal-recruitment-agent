@@ -1,17 +1,36 @@
 {
     "$schema": "http://json-schema.org/draft-07/schema#",
-    "title": "Job Openings Schema",
+    "title": "Job Openings",
     "type": "array",
     "items": {
         "type": "object",
         "properties": {
-            "OpeningId": {
+            "_id": {
                 "type": "string",
                 "format": "uuid",
                 "coerce": true
             },
+            "openingId": {
+                "type": "object",
+                "properties": {
+                    "$share": {
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "$share"
+                ]
+            },
             "recruiterId": {
-                "type": "string"
+                "type": "object",
+                "properties": {
+                    "$share": {
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "$share"
+                ]
             },
             "companyName": {
                 "type": "object",
@@ -102,7 +121,15 @@
             "applicantAddresses": {
                 "type": "array",
                 "items": {
-                    "type": "string"
+                    "type": "object",
+                    "properties": {
+                        "$share": {
+                            "type": "string"
+                        }
+                    },
+                    "required": [
+                        "$share"
+                    ]
                 }
             },
             "description": {
@@ -143,7 +170,8 @@
             }
         },
         "required": [
-            "OpeningId",
+            "_id",
+            "openingId",
             "recruiterId",
             "companyName",
             "jobTitle",

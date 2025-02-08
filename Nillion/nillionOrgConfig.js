@@ -2,7 +2,7 @@ console.log(process.env.SECRET_VAULT_PRIVATE_KEY);
 export const orgConfig = {
   // org credentials
   orgCredentials: {
-    secretKey: process.env.SECRET_VAULT_PRIVATE_KEY,
+    secretKey: "3ba1994f38ece43c5f2e29050e0f7cf9f886309dc0f869ec362390d531161ea2",
     orgDid: "did:nil:testnet:nillion15jaqslf8m9rv208wg3sad7ge29hpyxleyaj2q7",
   },
   // node config

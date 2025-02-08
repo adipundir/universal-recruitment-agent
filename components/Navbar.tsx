@@ -24,6 +24,9 @@ import {
     Identity,
     EthBalance,
 } from '@coinbase/onchainkit/identity';
+import useJobOpeningsStore from '@/Zustand/JobOpeningsStore'
+import { useEffect } from 'react'
+import getAllJobOpenings from "@/UtilityFunctions/GetAllOpenings.js"
 
 const routes = [
     { path: '/openings', label: 'Job Openings', value: 'openings' },
@@ -33,6 +36,17 @@ const routes = [
 export default function Navbar() {
     const { theme, setTheme } = useTheme()
     const { isConnected, address } = useAccount()
+    const jobOpenings = useJobOpeningsStore((state : any) => state.jobOpenings);
+    const setJobOpenings = useJobOpeningsStore((state : any) => state.setJobOpenings);
+
+
+    useEffect(() => {
+        (async () => {
+            const _JobOpenings = await getAllJobOpenings();
+            console.log("All openings",_JobOpenings)
+            setJobOpenings(_JobOpenings);
+        })();
+    }, []);
 
     return (
         <nav className="fixed top-0 left-0 right-0 z-50 bg-background border-b">
