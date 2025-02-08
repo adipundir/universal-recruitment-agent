@@ -6,6 +6,7 @@ import useJobOpeningsStore from "@/Zustand/JobOpeningsStore";
 import { Button } from "@/components/ui/button";
 import pdfToText from 'react-pdftotext'
 import { toast } from "sonner";
+import resumeScreeningAgent from "@/UtilityFunctions/ScreeningAgent";
 
 
 
@@ -24,6 +25,15 @@ export default function Apply() {
         console.log(file);
     };
 
+    useEffect(() => {
+        (async () => {
+            if (resume) {
+                const res = await pdfToText(resume);
+                setPdfText(res);
+            }
+        })();
+    }, [resume]);
+
     const handleSubmit = async () => {
         if (!resume) {
             alert("Please upload a resume first");
@@ -32,9 +42,7 @@ export default function Apply() {
 
         setIsSubmitting(true);
         try {
-            const res = await pdfToText(resume)
-            setPdfText(res)
-            console.log("PDF Text extracted:", res);
+            resumeScreeningAgent(pdfText, relevantOpening)
         } catch (error) {
             console.error("Error processing resume:", error);
             toast.error("Error processing resume.");

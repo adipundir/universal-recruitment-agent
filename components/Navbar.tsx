@@ -4,10 +4,7 @@ import Link from 'next/link'
 import { useTheme } from 'next-themes'
 import { Moon, Sun } from 'lucide-react'
 import { Button } from '@/components/ui/button'
-import { AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 import { useAccount } from 'wagmi'
-import { BlackCreateWalletButton } from './CoinbaseWalletBtn'
-import { TokenRow } from '@coinbase/onchainkit/token';
 import {
     ConnectWallet,
     Wallet,

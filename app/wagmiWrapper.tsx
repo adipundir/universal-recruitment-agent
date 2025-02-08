@@ -12,11 +12,14 @@ import { coinbaseWallet } from 'wagmi/connectors';
 
 const queryClient = new QueryClient();
 
-
 export const config = createConfig({
     chains: [baseSepolia],
     connectors: [
-        coinbaseWallet({ appName: 'Universal Recruiter', preference: 'smartWalletOnly', appLogoUrl: "/logo.png" }),
+        coinbaseWallet({
+            appName: 'Universal Recruiter',
+            preference: 'smartWalletOnly',
+            appLogoUrl: "/logo.png"
+        }),
     ],
     transports: {
         [baseSepolia.id]: http(),

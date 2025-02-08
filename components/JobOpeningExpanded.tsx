@@ -68,7 +68,7 @@ export default function JobOpeningExpanded({
 
                 <div className="flex gap-4">
                     <Button disabled={isAccepting != "true"}>
-                        <Link href={"/apply"}>
+                        <Link href={`/apply/${_id}`}>
                         Apply Now
                         </Link>
                         </Button>
