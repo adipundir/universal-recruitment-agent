@@ -1,5 +1,6 @@
-export type JobListing =  {
-  id: string;
+export type JobOpening =  {
+  OpeningId: string;
+  recruiterId: string
   companyName: string;
   companyLogo: string;
   jobTitle: string;
@@ -13,7 +14,7 @@ export type JobListing =  {
     | "Internship"
     | "Freelance"
     | "";
-  applicantCount: number;
+  applicantAddresses: string[]
   description: string;
   requirements: string[];
   isAccepting: boolean;

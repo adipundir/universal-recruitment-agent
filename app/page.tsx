@@ -28,6 +28,14 @@ const page = () => {
       >
         AGENT✨
       </GradientHeading>
+      <GradientHeading
+        variant="default"
+        size="lg"
+        weight="thin"
+        className="mb-2 italic"
+      >
+        Reducing Hiring cost by 80%
+      </GradientHeading>
     </div>
   )
 }

@@ -1,15 +1,29 @@
 'use client'
 
-import { useState, useEffect } from 'react'
 import Link from 'next/link'
-import { usePathname } from 'next/navigation'
 import { useTheme } from 'next-themes'
 import { Moon, Sun } from 'lucide-react'
 import { Button } from '@/components/ui/button'
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
-import { ConnectButton } from '@rainbow-me/rainbowkit'
+import { AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 import { useAccount } from 'wagmi'
-import { Address } from 'viem'
+import { BlackCreateWalletButton } from './CoinbaseWalletBtn'
+import { TokenRow } from '@coinbase/onchainkit/token';
+import {
+    ConnectWallet,
+    Wallet,
+    WalletDropdown,
+    WalletDropdownBasename,
+    WalletDropdownFundLink,
+    WalletDropdownLink,
+    WalletDropdownDisconnect,
+} from '@coinbase/onchainkit/wallet';
+import {
+    Address,
+    Avatar,
+    Name,
+    Identity,
+    EthBalance,
+} from '@coinbase/onchainkit/identity';
 
 const routes = [
     { path: '/openings', label: 'Job Openings', value: 'openings' },
@@ -29,21 +43,43 @@ export default function Navbar() {
                             URA
                         </Link>
                     </div>
-                    <div className="flex items-center space-x-4">
-                        {routes.map((route) => 
+                    <div className="flex items-center space-x-4 min-w-60">
+                        {routes.map((route) =>
                             <Link key={route.value} href={`${route.path}`} className='hover:underline-offset-4 hover:underline'>{route.label}</Link>
                         )}
                         <Button variant="outline" size="icon" onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}>
                             {theme === 'dark' ? <Sun className="h-[1.2rem] w-[1.2rem]" /> : <Moon className="h-[1.2rem] w-[1.2rem]" />}
                             <span className="sr-only">Toggle theme</span>
                         </Button>
-                        <ConnectButton />
-                        {isConnected ? (
-                            <Link href={`/profile/${address}`}>
-                            </Link>
-                        ) : (
-                            ""
-                        )}
+
+                        {/* <BlackCreateWalletButton /> */}
+                        <Wallet >
+                            <ConnectWallet className='bg-black dark:bg-white text-white dark:text-black'>
+                                <Avatar className="h-6 w-6  text-black dark:text-black bg-black" />
+                                {/* <Name /> */}
+                                <Address className=' text-white dark:text-black'/>
+                            </ConnectWallet>
+                            <WalletDropdown>
+                                <Identity
+                                    className="px-4 pt-3 pb-2"
+                                    hasCopyAddressOnClick
+                                >
+                                    <Avatar />
+                                    <Name />
+                                    <Address />
+                                    <EthBalance />
+                                </Identity>
+                                <WalletDropdownBasename />
+                                <WalletDropdownLink
+                                    icon="wallet"
+                                    href="https://keys.coinbase.com"
+                                >
+                                    View Balances
+                                </WalletDropdownLink>
+                                <WalletDropdownFundLink />
+                                <WalletDropdownDisconnect />
+                            </WalletDropdown>
+                        </Wallet>
                     </div>
                 </div>
             </div>

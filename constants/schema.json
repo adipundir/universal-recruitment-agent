@@ -1,16 +1,19 @@
 {
     "$schema": "http://json-schema.org/draft-07/schema#",
-    "title": "Web3 Experience Survey",
+    "title": "Job Openings Schema",
     "type": "array",
     "items": {
         "type": "object",
         "properties": {
-            "_id": {
+            "OpeningId": {
                 "type": "string",
                 "format": "uuid",
                 "coerce": true
             },
-            "name": {
+            "recruiterId": {
+                "type": "string"
+            },
+            "companyName": {
                 "type": "object",
                 "properties": {
                     "$share": {
@@ -21,7 +24,7 @@
                     "$share"
                 ]
             },
-            "years_in_web3": {
+            "companyLogo": {
                 "type": "object",
                 "properties": {
                     "$share": {
@@ -32,34 +35,125 @@
                     "$share"
                 ]
             },
-            "responses": {
+            "jobTitle": {
+                "type": "object",
+                "properties": {
+                    "$share": {
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "$share"
+                ]
+            },
+            "location": {
+                "type": "object",
+                "properties": {
+                    "$share": {
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "$share"
+                ]
+            },
+            "salary": {
+                "type": "object",
+                "properties": {
+                    "$share": {
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "$share"
+                ]
+            },
+            "postedDate": {
+                "type": "object",
+                "properties": {
+                    "$share": {
+                        "type": "string",
+                        "format": "date-time"
+                    }
+                },
+                "required": [
+                    "$share"
+                ]
+            },
+            "employmentType": {
+                "type": "object",
+                "properties": {
+                    "$share": {
+                        "type": "string",
+                        "enum": [
+                            "Full-time",
+                            "Part-time",
+                            "Contract",
+                            "Internship",
+                            "Freelance",
+                            ""
+                        ]
+                    }
+                },
+                "required": [
+                    "$share"
+                ]
+            },
+            "applicantAddresses": {
+                "type": "array",
+                "items": {
+                    "type": "string"
+                }
+            },
+            "description": {
+                "type": "object",
+                "properties": {
+                    "$share": {
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "$share"
+                ]
+            },
+            "requirements": {
                 "type": "array",
                 "items": {
                     "type": "object",
                     "properties": {
-                        "rating": {
-                            "type": "integer",
-                            "minimum": 1,
-                            "maximum": 5
-                        },
-                        "question_number": {
-                            "type": "integer",
-                            "minimum": 1
+                        "$share": {
+                            "type": "string"
                         }
                     },
                     "required": [
-                        "rating",
-                        "question_number"
+                        "$share"
                     ]
+                }
+            },
+            "isAccepting": {
+                "type": "object",
+                "properties": {
+                    "$share": {
+                        "type": "boolean"
+                    }
                 },
-                "minItems": 1
+                "required": [
+                    "$share"
+                ]
             }
         },
         "required": [
-            "_id",
-            "name",
-            "years_in_web3",
-            "responses"
+            "OpeningId",
+            "recruiterId",
+            "companyName",
+            "jobTitle",
+            "location",
+            "salary",
+            "postedDate",
+            "employmentType",
+            "description",
+            "requirements",
+            "isAccepting"
         ]
     }
 }

@@ -1,12 +1,10 @@
 "use client"
-import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { PlusCircle } from "lucide-react"
 import JobListingCard from "@/components/JobListingCard"
 import {
     Dialog,
     DialogContent,
-    DialogDescription,
     DialogHeader,
     DialogTitle,
     DialogTrigger,
@@ -64,38 +62,37 @@ export default function Home() {
     const [addOpeningDialogOpen, setAddOpeningDialogOpen] = useState<boolean>(false)
     const [isLoading, setisLoading] = useState<boolean>(false)
     return (
-        <>
-            <div className="pt-24 container min-h-[100vh] mx-auto py-8 flex flex-col gap-8">
-                {jobListings?.length > 0 && <div>
-                    <div className="text-4xl flex justify-between items-center sm:text-5xl md:text-6xl font-bold mb-8 text-black dark:text-white">
-                        <p>Job Listings ✨</p>
-                        <Dialog open={addOpeningDialogOpen} onOpenChange={setAddOpeningDialogOpen}>
-                            <DialogTrigger><Button disabled={isLoading} className="font-bold">
-                                {isLoading ? "Loading..." : <div className="flex items-center justify-center"> <PlusCircle className="mr-2 h-4 w-4" /> Add Job Opening</div> }
-                            </Button></DialogTrigger>
-                            <DialogContent className="overflow-y-scroll px-6 py-8 max-h-[80vh]">
-                                <DialogHeader>
-                                    <DialogTitle>New Job Opening Details</DialogTitle>
-                                    {/* <DialogDescription>
+        <div className="pt-24 container min-h-[100vh] w-full py-8 flex flex-col gap-8">
+            <div className="text-4xl w-full flex justify-between items-center sm:text-5xl md:text-6xl font-bold mb-8 text-black dark:text-white">
+                <p>Job Openings ✨</p>
+                {false && <Dialog open={addOpeningDialogOpen} onOpenChange={setAddOpeningDialogOpen}>
+                    <DialogTrigger><Button disabled={isLoading} className="font-bold">
+                        {isLoading ? "Loading..." : <div className="flex items-center justify-center"> <PlusCircle className="mr-2 h-4 w-4" /> Add Job Opening</div>}
+                    </Button></DialogTrigger>
+                    <DialogContent className="overflow-y-scroll px-6 py-8 max-h-[80vh]">
+                        <DialogHeader>
+                            <DialogTitle>New Job Opening Details</DialogTitle>
+                            {/* <DialogDescription>
                                         Fill the details for the new Job opening
                                     </DialogDescription> */}
-                                </DialogHeader>
-                                <CreateJobListing />
-                            </DialogContent>
-                        </Dialog>
-
-                    </div>
-                </div>}
-                
-                <div className="container mx-auto px-4 py-8">
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                        {jobListings.map((job) => (
-                            <JobListingCard key={job.id} {...job} />
-                        ))}
-                    </div>
+                        </DialogHeader>
+                        <CreateJobListing />
+                    </DialogContent>
+                </Dialog>}
+                {!false && <Button className="font-bold" onClick={() => {}}>Register as Recruiter</Button>}
+            </div>
+            <div className="container w-full px-4 py-8">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    {jobListings?.length > 0 ? jobListings?.map((job) => (
+                        <JobListingCard key={job.id} {...job} />
+                    )) :
+                        <div className="text-center text-lg col-span-full min-w-full">
+                            No Job Listings 😞
+                        </div>
+                    }
                 </div>
             </div>
-        </>
+        </div>
     )
 }
 
