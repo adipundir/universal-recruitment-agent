@@ -58,6 +58,7 @@ export default async function resumeScreeningAgent(resume: string, jobID: any) {
     console.log(email);
     console.log(job.companyName);
     console.log('job fetched', job)
+    
     job.candidates.push({
       candidateEmail: email,
       candidateResume: resume,
