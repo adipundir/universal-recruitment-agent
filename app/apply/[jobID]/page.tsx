@@ -6,9 +6,10 @@ import useJobOpeningsStore from "@/Zustand/JobOpeningsStore";
 import { Button } from "@/components/ui/button";
 import pdfToText from 'react-pdftotext'
 import { toast } from "sonner";
-import resumeScreeningAgent from "@/UtilityFunctions/ScreeningAgent";
-
-
+import resumeScreeningAgent from "@/UtilityFunctions/ResumeScreeningAgent";
+import { MultiStepLoader } from "@/components/ui/multi-step-loader";
+import useLoadingStore from "@/Zustand/LoadingStore";
+import { IconSquareRoundedX } from "@tabler/icons-react";
 
 export default function Apply() {
     const params = useParams()
@@ -18,12 +19,17 @@ export default function Apply() {
     const [resume, setResume] = useState<File>();
     const [pdfText, setPdfText] = useState("");
 
-    const [isSubmitting, setIsSubmitting] = useState(false);
+    const isLoading = useLoadingStore((state: any) => state.isLoading)
+    const setIsLoading = useLoadingStore((state: any) => state.setIsLoading)
 
     const handleFileUpload = (file: File) => {
         setResume(file);
         console.log(file);
     };
+
+    useEffect(() => {
+        console.log("Is submitting", isLoading)
+    }, [isLoading])
 
     useEffect(() => {
         (async () => {
@@ -40,19 +46,26 @@ export default function Apply() {
             return;
         }
 
-        setIsSubmitting(true);
+        setIsLoading(true);
         try {
-            resumeScreeningAgent(pdfText, relevantOpening)
+            const result = await resumeScreeningAgent(pdfText, relevantOpening._id);
+            toast(result);
         } catch (error) {
             console.error("Error processing resume:", error);
             toast.error("Error processing resume.");
         } finally {
-            setIsSubmitting(false);
+            setIsLoading(false);
         }
     };
 
     // if (relevantOpening == null)
     //     return 
+
+    const loadingStates = [
+        { text: "Scanning Resume..." },
+        { text: "Analyzing Skills & Experience..." },
+        { text: "Finalizing Decision..." }
+    ];
 
     return (
         <div className="flex flex-col gap-4 pt-24">
@@ -62,12 +75,20 @@ export default function Apply() {
             <div className="w-full flex items-center justify-center max-w-4xl mx-auto mt-4">
                 <Button
                     onClick={handleSubmit}
-                    disabled={!resume || isSubmitting}
+                    disabled={!resume || isLoading}
                     className=" py-2 px-4 rounded-lg disabled:bg-gray-400 disabled:cursor-not-allowed"
                 >
-                    {isSubmitting ? "Processing..." : "Submit Resume for Screening"}
+                    {isLoading ? "Processing..." : "Submit Resume for Screening"}
                 </Button>
             </div>
+            <MultiStepLoader loadingStates={loadingStates} loading={isLoading} duration={2000} />
+            {isLoading && <button
+                className="fixed top-2 right-4 text-black dark:text-white z-[12000]"
+                onClick={() => setIsLoading(false)}
+                disabled={isLoading}
+            >
+                <IconSquareRoundedX className="h-10 w-10" />
+            </button>}
         </div>
     );
 }

@@ -1,40 +1,113 @@
 "use client"
 import { Button } from '@/components/ui/button'
 import { UploadJobOpeningToSecretVault } from '@/UtilityFunctions/UploadJobOpeningToSecretVault.js'
+import updateSVRecord  from '@/UtilityFunctions/UpdateSVRecord.js'
 import React from 'react'
+import transformObject from '@/UtilityFunctions/TransformRecord'
 
 const page = () => {
 
   const handleUpload = async () => {
     const jobOpenings = [
       {
-        openingId: { $allot: "JOB-2024-004" },
-        recruiterId: { $allot: "REC-112" },
-        companyName: { $allot: "Polygon Labs" },
-        companyLogo: { $allot: "https://polygon.com/logo.png" },
-        jobTitle: { $allot: "ZK Proof Engineer" },
-        location: { $allot: "Dubai, UAE (On-site)" },
-        salary: { $allot: "$160,000 - $210,000" },
-        postedDate: { $allot: "2024-02-08T09:00:00Z" },
-        employmentType: { $allot: "Full-time" },
-        description: {
-          $allot: "Join Polygon Labs' ZK division to develop and implement cutting-edge zero-knowledge proof systems. You'll be working on scaling solutions that will help bring Web3 to millions of users worldwide."
-        },
-        requirements: [
-          { $allot: "PhD in Computer Science, Mathematics, or related field" },
-          { $allot: "Deep expertise in zero-knowledge proof systems (SNARK, STARK)" },
-          { $allot: "Experience with Rust and C++" },
-          { $allot: "Understanding of modern cryptographic primitives" },
-          { $allot: "Published research in cryptography or zero-knowledge proofs is a plus" }
+        "recruiterEmail": { "$allot": "recruiter@example.com" },
+        "companyName": { "$allot": "Tech Innovators Inc." },
+        "companyLogo": { "$allot": "https://example.com/logo.png" },
+        "jobTitle": { "$allot": "Software Engineer" },
+        "location": { "$allot": "San Francisco, CA" },
+        "salary": { "$allot": "$120,000 - $150,000" },
+        "postedDate": { "$allot": "2025-02-09" },
+        "employmentType": { "$allot": "Full-time" },
+        "description": { "$allot": "We are looking for a skilled Software Engineer to join our team." },
+        "requirements": [
+          { "$allot": "Proficiency in JavaScript and React" },
+          { "$allot": "Experience with cloud platforms like AWS" },
+          { "$allot": "Strong problem-solving skills" }
         ],
-        isAccepting: { $allot: true }
+        "isAccepting": { "$allot": "true" },
+        "hasPaid": { "$allot": "true" },
+        "candidates": [
+          { 
+            "candidateEmail": { "$allot": "applicant1@example.com" },
+            "candidateResume": { "$allot": "Complete resume in text" },
+            "interviewScheduled": { "$allot": "2025-02-15" },
+            "resumeScore": { "$allot": "85" },
+            "interviewScores": {
+              "knowledge": { "$allot": "90" },
+              "truthfulness": { "$allot": "80" },
+              "communication": { "$allot": "85" },
+              "confidence": { "$allot": "88" },
+              "problemSolving": { "$allot": "87" },
+              "jobFit": { "$allot": "89" },
+              "adaptability": { "$allot": "86" },
+              "culturalFit": { "$allot": "84" }
+            },
+            "overallScore": { "$allot": "86" },
+            "feedback": { "$allot": "Strong candidate with great problem-solving skills." },
+            "interviewDate": { "$allot": "2025-02-15" },
+            "verdict": { "$allot": "Hired" }
+          }
+        ]
+      },
+      {
+        "recruiterEmail": { "$allot": "hr@startupx.com" },
+        "companyName": { "$allot": "Startup X" },
+        "companyLogo": { "$allot": "https://example.com/startupx-logo.png" },
+        "jobTitle": { "$allot": "Product Manager" },
+        "location": { "$allot": "New York, NY" },
+        "salary": { "$allot": "$110,000 - $140,000" },
+        "postedDate": { "$allot": "2025-02-08" },
+        "employmentType": { "$allot": "Full-time" },
+        "description": { "$allot": "Looking for an experienced Product Manager to drive our product vision." },
+        "requirements": [
+          { "$allot": "5+ years of experience in product management" },
+          { "$allot": "Strong leadership and communication skills" },
+          { "$allot": "Experience with Agile methodologies" }
+        ],
+        "isAccepting": { "$allot": "true" },
+        "hasPaid": { "$allot": "false" },
+        "candidates": []
       }
-    ];
-
+    ]
+    
+    
     UploadJobOpeningToSecretVault(jobOpenings)
   }
+  
+  const handleUpdate = async () => {
+    const newRecord = {
+      "recruiterEmail": { "$allot": "abcd@1234.com" },
+      "companyName": { "$allot": "Startup Z" },
+      "companyLogo": { "$allot": "https://example.com/startupx-logo.png" },
+      "jobTitle": { "$allot": "Product Manager" },
+      "location": { "$allot": "New York, NY" },
+      "salary": { "$allot": "$110,000 - $140,000" },
+      "postedDate": { "$allot": "2025-02-08" },
+      "employmentType": { "$allot": "Full-time" },
+      "description": { "$allot": "Looking for an experienced Product Manager to drive our product vision." },
+      "requirements": [
+        { "$allot": "5+ years of experience in product management" },
+        { "$allot": "Strong leadership and communication skills" },
+        { "$allot": "Experience with Agile methodologies" }
+      ],
+      "isAccepting": { "$allot": "true" },
+      "hasPaid": { "$allot": "false" },
+      "candidates": []
+    }
+    updateSVRecord(newRecord,"da7c3071-6ab0-4e81-bae0-e5945c98964e")
+  }
+
+  const transFormRecord = () => {
+    const transformedJobPosting = transformObject();
+  }
+
   return (
-      <Button className='mt-32' onClick={handleUpload}>Click</Button>
+    <div>
+      <Button className='mt-32' onClick={handleUpload}>Upload</Button>
+      <Button className='mt-32' onClick={handleUpdate}>Update</Button>
+      <Button className='mt-32' onClick={transFormRecord}>Transform</Button>
+    </div>
+
   )
 }
 

@@ -10,7 +10,7 @@
                 "format": "uuid",
                 "coerce": true
             },
-            "recruiterId": {
+            "recruiterEmail": {
                 "type": "object",
                 "properties": {
                     "$share": {
@@ -103,7 +103,29 @@
                 "items": {
                     "type": "object",
                     "properties": {
-                        "candidateId": {
+                        "candidateEmail": {
+                            "type": "object",
+                            "properties": {
+                                "$share": {
+                                    "type": "string"
+                                }
+                            },
+                            "required": [
+                                "$share"
+                            ]
+                        },
+                        "candidateResume": {
+                            "type": "object",
+                            "properties": {
+                                "$share": {
+                                    "type": "string"
+                                }
+                            },
+                            "required": [
+                                "$share"
+                            ]
+                        },
+                        "interviewScheduled": {
                             "type": "object",
                             "properties": {
                                 "$share": {
@@ -274,12 +296,11 @@
                         }
                     },
                     "required": [
-                        "candidateId",
+                        "candidateEmail",
+                        "candidateResume",
+                        "interviewScheduled",
                         "resumeScore",
-                        "interviewScores",
-                        "overallScore",
                         "feedback",
-                        "interviewDate",
                         "verdict"
                     ]
                 }
@@ -323,7 +344,7 @@
         },
         "required": [
             "_id",
-            "recruiterId",
+            "recruiterEmail",
             "companyName",
             "jobTitle",
             "location",
@@ -332,7 +353,8 @@
             "employmentType",
             "description",
             "requirements",
-            "isAccepting"
+            "isAccepting",
+            "hasPaid"
         ]
     }
 }
