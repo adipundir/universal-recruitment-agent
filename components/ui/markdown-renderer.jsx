@@ -5,11 +5,7 @@ import remarkGfm from "remark-gfm"
 import { cn } from "@/lib/utils"
 import { CopyButton } from "@/components/ui/copy-button"
 
-interface MarkdownRendererProps {
-  children: string
-}
-
-export function MarkdownRenderer({ children }: MarkdownRendererProps) {
+export function MarkdownRenderer({ children }) {
   return (
     <Markdown
       remarkPlugins={[remarkGfm]}
@@ -21,13 +17,8 @@ export function MarkdownRenderer({ children }: MarkdownRendererProps) {
   )
 }
 
-interface HighlightedPre extends React.HTMLAttributes<HTMLPreElement> {
-  children: string
-  language: string
-}
-
 const HighlightedPre = React.memo(
-  async ({ children, language, ...props }: HighlightedPre) => {
+  async ({ children, language, ...props }) => {
     const { codeToTokens, bundledLanguages } = await import("shiki")
 
     if (!(language in bundledLanguages)) {
@@ -35,7 +26,7 @@ const HighlightedPre = React.memo(
     }
 
     const { tokens } = await codeToTokens(children, {
-      lang: language as keyof typeof bundledLanguages,
+      lang: language ,
       defaultColor: false,
       themes: {
         light: "github-light",
@@ -76,18 +67,13 @@ const HighlightedPre = React.memo(
 )
 HighlightedPre.displayName = "HighlightedCode"
 
-interface CodeBlockProps extends React.HTMLAttributes<HTMLPreElement> {
-  children: React.ReactNode
-  className?: string
-  language: string
-}
 
 const CodeBlock = ({
   children,
   className,
   language,
   ...restProps
-}: CodeBlockProps) => {
+}) => {
   const code =
     typeof children === "string"
       ? children
@@ -119,7 +105,7 @@ const CodeBlock = ({
   )
 }
 
-function childrenTakeAllStringContents(element: any): string {
+function childrenTakeAllStringContents(element) {
   if (typeof element === "string") {
     return element
   }
@@ -148,7 +134,7 @@ const COMPONENTS = {
   strong: withClass("strong", "font-semibold"),
   a: withClass("a", "text-primary underline underline-offset-2"),
   blockquote: withClass("blockquote", "border-l-2 border-primary pl-4"),
-  code: ({ children, className, node, ...rest }: any) => {
+  code: ({ children, className, node, ...rest }) => {
     const match = /language-(\w+)/.exec(className || "")
     return match ? (
       <CodeBlock className={className} language={match[1]} {...rest}>
@@ -165,7 +151,7 @@ const COMPONENTS = {
       </code>
     )
   },
-  pre: ({ children }: any) => children,
+  pre: ({ children }) => children,
   ol: withClass("ol", "list-decimal space-y-2 pl-6"),
   ul: withClass("ul", "list-disc space-y-2 pl-6"),
   li: withClass("li", "my-1.5"),
@@ -186,8 +172,8 @@ const COMPONENTS = {
   hr: withClass("hr", "border-foreground/20"),
 }
 
-function withClass(Tag: keyof JSX.IntrinsicElements, classes: string) {
-  const Component = ({ node, ...props }: any) => (
+function withClass(Tag, classes) {
+  const Component = ({ node, ...props }) => (
     <Tag className={classes} {...props} />
   )
   Component.displayName = Tag

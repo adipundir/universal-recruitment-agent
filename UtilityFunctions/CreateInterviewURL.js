@@ -1,3 +1,3 @@
 export const createInterviewURL = (jobID, email) => {
-    return `http://localhost/interview/${jobID}/${encodeURIComponent(email)}`;
+    return `http://universal-recruitment-agent.vercel.app/interview/${jobID}/${encodeURIComponent(email)}`;
 };
