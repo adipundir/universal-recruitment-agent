@@ -1,10 +1,14 @@
 const nextConfig = {
   images: {
     remotePatterns: [
-      { protocol: "https", hostname: "polygon.com" },
-      { protocol: "https", hostname: "chainlink.com" },
-      { protocol: "https", hostname: "ethereum.org" },
-      { protocol: "https", hostname: "example.com" },
+      {
+        protocol: "https",
+        hostname: "**",
+      },
+      {
+        protocol: "http",
+        hostname: "**",
+      },
     ],
   },
 };

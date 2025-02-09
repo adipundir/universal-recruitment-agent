@@ -4,6 +4,7 @@ import { orgConfig } from "@/constants/nillionOrgConfig";
 
 export const UploadJobOpeningToSecretVault = async (payload) => {
   const SCHEMA_ID = process.env.SECRET_VAULT_JOB_LISTING_SCHEMA_ID;
+  console.log(payload, SCHEMA_ID)
     try {
       const collection = new SecretVaultWrapper(
         orgConfig.nodes,

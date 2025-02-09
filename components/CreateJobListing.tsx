@@ -8,6 +8,10 @@ import { Textarea } from "@/components/ui/textarea"
 import { Checkbox } from "@/components/ui/checkbox"
 import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
+import transformObject from "@/UtilityFunctions/TransformRecord"
+import { UploadJobOpeningToSecretVault } from "@/UtilityFunctions/UploadJobOpeningToSecretVault"
+import { toast } from "sonner"
+import useJobOpeningsStore from "@/Zustand/JobOpeningsStore"
 
 const formSchema = z.object({
     companyName: z.string().min(2, { message: "Company name must be at least 2 characters." }),
@@ -22,6 +26,9 @@ const formSchema = z.object({
 })
 
 export default function CreateJobListing() {
+    const jobOpenings = useJobOpeningsStore((state: any) => state.jobOpenings);
+    const setJobOpenings = useJobOpeningsStore((state: any) => state.setJobOpenings);
+
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
         defaultValues: {
@@ -37,9 +44,12 @@ export default function CreateJobListing() {
         },
     })
 
-    function onSubmit(values: z.infer<typeof formSchema>) {
-        // Here you would typically send the form data to your backend
-        console.log(values)
+    async function onSubmit(values: z.infer<typeof formSchema>) {
+        const transformedvalues = transformObject(values)
+        await UploadJobOpeningToSecretVault(transformedvalues)
+        toast("Job Opening Added. Please Refresh")
+        console.log("Initial Values",values)
+        console.log("transformed values",transformedvalues)
     }
 
     return (

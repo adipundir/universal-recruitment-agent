@@ -344,17 +344,13 @@
         },
         "required": [
             "_id",
-            "recruiterEmail",
             "companyName",
             "jobTitle",
             "location",
             "salary",
-            "postedDate",
             "employmentType",
             "description",
-            "requirements",
-            "isAccepting",
-            "hasPaid"
+            "requirements"
         ]
     }
 }
